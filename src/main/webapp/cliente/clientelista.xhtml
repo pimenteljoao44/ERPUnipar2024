@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/index.xhtml">
+        <ui:define name="body">
+            <h2>Lista de Clientes </h2>
+            <br/>
+            <h:form>            
+                <p:dataTable value="#{clienteControle.listagem}"
+                             var="item"
+                             emptyMessage="Nenhum cliente cadastrado!"
+                             paginator="true" rows="10"
+                             rowsPerPageTemplate="5,10,50,100,{ShowAll|'All'}">
+                    <p:column headerText="ID" filterBy="${item.id}" filterMatchMode="contains"
+                              sortBy="#{item.id}">
+                        <h:outputText value="#{item.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome" filterBy="${item.nome}" filterMatchMode="contains"
+                              sortBy="#{item.nome}">
+                        <h:outputText value="#{item.nome}"/>
+                    </p:column>
+                    <p:column headerText="CPF" filterBy="${item.cpf}" filterMatchMode="contains"
+                              sortBy="#{item.cpf}">
+                        <h:outputText value="#{item.cpf}"/>
+                    </p:column>
+                    <p:column headerText="RG" filterBy="${item.rg}" filterMatchMode="contains"
+                              sortBy="#{item.rg}">
+                        <h:outputText value="#{item.rg}"/>
+                    </p:column>
+                    <p:column headerText="Fone" filterBy="${item.numero}" filterMatchMode="contains"
+                              sortBy="#{item.numero}">
+                        <h:outputText value="#{item.numero}"/>
+                    </p:column>
+                    <p:column headerText="Endereço" filterBy="${item.endereco}" filterMatchMode="contains"
+                              sortBy="#{item.endereco}">
+                        <h:outputText value="#{item.endereco}"/>
+                    </p:column>
+                    <p:column headerText="Cidade" filterBy="${item.cidade}" filterMatchMode="contains"
+                              sortBy="#{item.cidade}">
+                        <h:outputText value="#{item.cidade.nome}"/>
+                    </p:column>
+                    <p:column headerText="Opções">
+                        <p:commandButton value="Editar"
+                                         action="clienteedita.xhtml"
+                                         actionListener="#{clienteControle.editar(item)}"
+                                         ajax="false"
+                                         immediate="true"/>
+                        <p:commandButton value="Excluir" 
+                                         action="#{clienteControle.excluir(item)}"
+                                         ajax="false"
+                                         immediate="true"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Novo Cliente" action="clienteedita.xhtml" 
+                                 actionListener="#{clienteControle.novo()}"
+                                 ajax="false"/>
+            </h:form>
+            <p:messages id="messages" showDetail="true" closable="true"/>
+        </ui:define>        
+    </ui:composition>
+</html>

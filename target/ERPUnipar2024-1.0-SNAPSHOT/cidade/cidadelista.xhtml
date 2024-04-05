@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/index.xhtml">
+        <ui:define name="body">
+            <h2>Lista de Cidades</h2>
+            <br/>
+            <h:form>            
+                <p:dataTable value="#{cidadeControle.listaCidades}" var="cid"
+                             emptyMessage="Nenhum cidade cadastrado!"
+                             paginator="true" rows="10"
+                             rowsPerPageTemplate="5,10,50,100,{ShowAll|'All'}">
+                    <p:column headerText="Nome" filterBy="${cid.nome}" filterMatchMode="contains"
+                              sortBy="#{cid.nome}">
+                        <h:outputText value="#{cid.nome}"/>
+                    </p:column>
+                    <p:column headerText="Estado" filterBy="${cid.estado.nome}" filterMatchMode="contains"
+                              sortBy="#{cid.estado.nome}">
+                        <h:outputText value="#{cid.estado.nome}"/>
+                    </p:column>
+                    <p:column headerText="Operações">
+                        <p:commandButton value="Excluir" 
+                                         action="#{cidadeControle.excluir(cid)}"
+                                         ajax="false"
+                                         immediate="true"/>
+                        <p:commandButton value="Editar" 
+                                         action="cidadeedita.xhtml"
+                                         actionListener="#{cidadeControle.editar(cid)}"
+                                         ajax="false"
+                                         immediate="true"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Novo Cidade" action="cidadeedita.xhtml" 
+                                 actionListener="#{cidadeControle.novo()}"
+                                 ajax="false"/>
+            </h:form>
+        </ui:define>        
+    </ui:composition>
+</html>

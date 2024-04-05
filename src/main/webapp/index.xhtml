@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>ERP Unipar 2024</title>
+    </h:head>
+    <h:body>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="100">
+                <table>
+                    <tr>
+                        <td width="35"></td>
+                        <td width="450"><img src="https://www.rodolfonakamura.com.br/wp-content/uploads/2016/10/lg-unipar.jpg" width="80"/></td>
+                        <td><p:outputLabel value="ERP Unipar 2024" style="font-size: xx-large"/></td>
+                    </tr>
+                </table>
+            </p:layoutUnit>
+            <p:layoutUnit position="south" size="40">
+                <div align="center">
+                    <p:outputLabel value="Todos os direitos reservados. @2024"/>
+                </div>
+            </p:layoutUnit>
+            <p:layoutUnit position="west" size="160">
+                <h:form id="formulario">
+                    <p:panelMenu style="width: 150px" >
+                        <p:submenu label="Cadastros" rendered="true" >
+                            <p:menuitem value="Estado" ajax="false" action="/estado/estadolista.xhtml"/>
+                            <p:menuitem value="Cidade" ajax="false" action="/cidade/cidadelista.xhtml"/>
+                            <p:menuitem value="Cliente" ajax="false" action="/cliente/clientelista.xhtml"/>
+                            <p:menuitem value="Produto" ajax="false" action="/produto/produtolista.xhtml"/>
+                            <p:menuitem value="Usuário" ajax="false" action="#"/>
+                        </p:submenu>                                                      
+                        <p:submenu label="Movimentos" rendered="true" >
+                            <p:menuitem value="Venda" ajax="false" action="#"/>
+                            <p:menuitem value="Contas a Receber" ajax="false" action="#"/>
+                        </p:submenu>
+                        <p:submenu label="Relatórios" rendered="true" >
+                            <p:menuitem value="Cidades" ajax="false" action="#"/>
+                            <p:menuitem value="Vendas" ajax="false" action="#"/>
+                        </p:submenu>
+                    </p:panelMenu>
+                </h:form>
+            </p:layoutUnit>
+            <p:layoutUnit position="center">
+                <ui:insert id="corpo" name="body">
+                    Seja bem vindo!
+                </ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+    </h:body>
+</html>
