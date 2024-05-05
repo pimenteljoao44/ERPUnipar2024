@@ -6,11 +6,15 @@ facade/CidadeFacade.class
 entidades/ClassePai.class
 controle/ClienteControle.class
 entidades/Cliente.class
+entidades/Venda.class
 converter/EstadoConverter.class
 entidades/Cidade.class
 facade/ProdutoFacade.class
 controle/CidadeControle.class
 controle/EstadoControle.class
 converter/ConverterGenerico.class
+facade/VendaFacade.class
 facade/AbstractFacade.class
+entidades/ItemVenda.class
+controle/VendaControle.class
 controle/ProdutoControle.class

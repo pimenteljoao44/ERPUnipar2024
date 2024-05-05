@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/index.xhtml">
+        <ui:define name="body">
+            <h2>Lista de Vendas</h2>
+            <br/>
+            <h:form>            
+                <p:dataTable value="#{vendaControle.listaVendas}" var="ve"
+                             emptyMessage="Nenhum venda cadastrado!"
+                             paginator="true" rows="10"
+                             rowsPerPageTemplate="5,10,50,100,{ShowAll|'All'}">
+                    <p:column headerText="Data Venda" filterBy="${ve.dataVenda}" filterMatchMode="contains"
+                              sortBy="#{ve.dataVenda}">
+                        <h:outputText value="#{ve.dataVenda}">
+                            <f:convertDateTime pattern="dd/MM/yyyy"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Cliente" filterBy="${ve.cliente.nome}" filterMatchMode="contains"
+                              sortBy="#{ve.cliente.nome}">
+                        <h:outputText value="#{ve.cliente.nome}"/>
+                    </p:column>
+                    <p:column headerText="Total" filterBy="${ve.total}" filterMatchMode="contains"
+                              sortBy="#{ve.total}">
+                        <h:outputText value="#{ve.total}">
+                            <f:convertNumber type="currency"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="Operações">
+                        <p:commandButton value="Excluir" 
+                                         action="#{vendaControle.excluir(ve)}"
+                                         ajax="false"
+                                         immediate="true"/>
+                        <p:commandButton value="Editar" 
+                                         action="vendaedita.xhtml"
+                                         actionListener="#{vendaControle.editar(ve)}"
+                                         ajax="false"
+                                         immediate="true"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Novo Venda" action="vendaedita.xhtml" 
+                                 actionListener="#{vendaControle.novo()}"
+                                 ajax="false"/>
+            </h:form>
+        </ui:define>        
+    </ui:composition>
+</html>
