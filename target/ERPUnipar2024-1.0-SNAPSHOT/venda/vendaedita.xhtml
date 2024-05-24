@@ -11,7 +11,7 @@
             <h2>Movimento de Venda</h2>
             <br/>
             <h:form>
-                <p:messages showDetail="false"/>
+                <p:messages showDetail="false" closable="true"/>
                 <p:growl />
                 <h:panelGrid columns="2">
                     Data da Venda:<p:calendar value="#{vendaControle.venda.dataVenda}" 
@@ -47,7 +47,7 @@
                         </p:column>
                         <p:column headerText="Quantidade" sortBy="#{item.quantidade}">
                             <h:outputText value="#{item.quantidade}">
-                                <f:convertNumber type="currency" />
+                                <f:convertNumber/>
                             </h:outputText>
                         </p:column>
                         <p:column headerText="Preço" sortBy="#{item.preco}">

@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -89,7 +90,7 @@ public class VendaControle implements Serializable {
         venda = new Venda();
         FacesContext.getCurrentInstance().getApplication().getNavigationHandler().
                 handleNavigation(FacesContext.getCurrentInstance(),
-                         null, "vendalista.xhtml?faces-redirect=true");
+                        null, "vendalista.xhtml?faces-redirect=true");
     }
 
     public void excluir(Venda est) {
@@ -101,12 +102,29 @@ public class VendaControle implements Serializable {
     }
 
     public void adicionarItem() {
+        Integer estoque = itemVenda.getProduto().getEstoque();
+        ItemVenda itemTemp = null;
+        for (ItemVenda it : venda.getItensVendas()) {
+            if (it.getProduto().getId().equals(itemVenda.getProduto().getId())) {
+                itemTemp = it;
+                estoque = estoque - it.getQuantidade().intValue();
+            }
+        }
+
         if (venda.getItensVendas() == null) {
             venda.setItensVendas(new ArrayList<ItemVenda>());
+        } else if (estoque < itemVenda.getQuantidade()) {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR, "Estoque insuficiente! restam apenas " + estoque + " unidades!", null));
+        } else {
+            if (itemTemp == null) {
+                itemVenda.setVenda(venda);
+                venda.getItensVendas().add(itemVenda);
+            } else {
+                itemTemp.setQuantidade(itemTemp.getQuantidade() + itemVenda.getQuantidade());
+            }
+            itemVenda = new ItemVenda();
         }
-        itemVenda.setVenda(venda);
-        venda.getItensVendas().add(itemVenda);
-        itemVenda = new ItemVenda();
     }
 
     public Venda getVenda() {

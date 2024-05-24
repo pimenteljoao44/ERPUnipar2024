@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/index.xhtml">
+        <ui:define name="body">
+            <h2>Cadastro de Fornecedores</h2>
+            <br/>
+            <h:form rendered="#{fornecedorControle.fornecedor != null}">
+                <p:panel id="painelForm" header="Formulario para cadastro de fornecedores">
+
+                    <p:panelGrid layout="grid" columns="2">
+                        <p:outputLabel value="Nome:" for="nome"/>
+                        <p:inputText id="nome" value="#{fornecedorControle.fornecedor.nome}"
+                                     required="true"
+                                     requiredMessage="O campo nome é obrigatório"/>
+
+                        <p:outputLabel value="Fone:" for="fone"/>
+                        <p:inputText id="fone" value="#{fornecedorControle.fornecedor.numero}"/>
+
+                        <p:outputLabel value="CPF:" for="cpf" 
+                                       />
+                        <p:inputMask mask="999.999.999-99"
+                                     id="cpf"
+                                     required="true"
+                                     requiredMessage="O campo CPF é obrigatório"
+                                     value="#{fornecedorControle.fornecedor.cpf}"
+                                     />
+
+                        <p:outputLabel value="RG:" for="rg"
+                                       />
+                        <p:inputText id="rg"
+                                     requiredMessage="O campo RG é obrigatório"
+                                     required="true"
+                                     value="#{fornecedorControle.fornecedor.rg}"/>
+
+                        <p:outputLabel value="Endereço:" for="end"/>
+                        <p:inputText id="end" value="#{fornecedorControle.fornecedor.endereco}"
+                                     required="true"
+                                     requiredMessage="O campo endereço é obrigatório"/>
+
+                        Cidade:<p:autoComplete value="#{fornecedorControle.fornecedor.cidade}"
+                                               completeMethod="#{fornecedorControle.completeCidade}"
+                                               var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}"
+                                               converter="#{fornecedorControle.converter()}" 
+                                               forceSelection="true" dropdown="true"
+                                               required="true"
+                                               requiredMessage="O campo cidade é obrigatório"/>
+                    </p:panelGrid>
+                    <f:facet name="footer">
+                        <p:commandButton value="Salvar"
+                                         actionListener="#{fornecedorControle.salvar()}"
+                                         action="fornecedorlista.xhtml"
+                                         ajax="false"/>
+                        <p:commandButton value="Cancelar" 
+                                         action="fornecedorlista.xhtml"
+                                         immediate="true"
+                                         ajax="false"/>
+                    </f:facet>
+                </p:panel>
+            </h:form>
+            <p:messages id="messages" showDetail="true" closable="true"/>
+        </ui:define>        
+    </ui:composition>
+</html>

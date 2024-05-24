@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Produto implements Serializable, ClassePai {
@@ -24,6 +26,10 @@ public class Produto implements Serializable, ClassePai {
     private BigDecimal preco;
 
     private Integer estoque;
+    
+    @ManyToOne
+    @JoinColumn(name = "fornecedor_id")
+    private Fornecedor fornecedor;
 
     @Override
     public Long getId() {
@@ -57,6 +63,16 @@ public class Produto implements Serializable, ClassePai {
     public void setEstoque(Integer estoque) {
         this.estoque = estoque;
     }
+
+    public Fornecedor getFornecedor() {
+        return fornecedor;
+    }
+
+    public void setFornecedor(Fornecedor fornecedor) {
+        this.fornecedor = fornecedor;
+    }
+    
+    
 
     @Override
     public int hashCode() {

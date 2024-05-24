@@ -4,6 +4,8 @@
  */
 package facade;
 
+import entidades.ItemVenda;
+import entidades.Produto;
 import entidades.Venda;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -28,5 +30,13 @@ public class VendaFacade extends AbstractFacade<Venda> {
         super(Venda.class);
     }
 
+@Override
+    public void  salvar(Venda entity){
+        for(ItemVenda it : entity.getItensVendas()){
+            Produto p = it.getProduto();
+            p.setEstoque(p.getEstoque() - it.getQuantidade().intValue());
+            em.merge(p);
+        }
+    }
 
 }

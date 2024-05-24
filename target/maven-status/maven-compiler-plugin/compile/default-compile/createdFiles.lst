@@ -1,10 +1,12 @@
 entidades/Produto.class
 facade/ClienteFacade.class
 facade/EstadoFacade.class
+entidades/Fornecedor.class
 entidades/Estado.class
 facade/CidadeFacade.class
 entidades/ClassePai.class
 controle/ClienteControle.class
+controle/FornecedorControle.class
 entidades/Cliente.class
 entidades/Venda.class
 converter/EstadoConverter.class
@@ -17,4 +19,5 @@ facade/VendaFacade.class
 facade/AbstractFacade.class
 entidades/ItemVenda.class
 controle/VendaControle.class
+facade/FornecedorFacade.class
 controle/ProdutoControle.class
